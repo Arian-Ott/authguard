@@ -1,0 +1,59 @@
+[project]
+name = "authguard"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Arian-Ott", email = "arian.ott@ieee.org" }
+]
+requires-python = ">=3.14"
+dependencies = [
+    "argon2-cffi>=25.1.0",
+    "fastapi[standard]>=0.141.1",
+    "pydantic-settings>=2.15.0",
+    "pydantic[email]>=2.13.4",
+    "tortoise-orm[asyncmy]>=1.1.8",
+    "tzdata>=2026.3 ; sys_platform == 'win32'",
+    "uvicorn>=0.52.2",
+]
+
+[project.optional-dependencies]
+dev = [
+    "ruff>=0.16.2",
+]
+
+[tool.tortoise]
+tortoise_orm = "backend.config.TORTOISE_ORM"
+
+[tool.ruff]
+line-length = 80
+target-version = "py314"
+exclude = [
+    "backend.migrations",
+    "tests",
+]
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes
+    "I",   # isort
+    "B",   # flake8-bugbear
+    "C4",  # flake8-comprehensions
+    "UP",  # pyupgrade
+    "SIM", # flake8-simplify
+    "TCH", # flake8-type-checking
+    "ANN", # flake8-annotations
+]
+ignore = [
+    "E501",   # Zeilenlänge wird von formatter übernommen
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["backend"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+line-ending = "lf"
